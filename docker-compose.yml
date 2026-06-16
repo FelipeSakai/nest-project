@@ -1,0 +1,32 @@
+services:
+  app:
+    image: node:22-alpine
+    container_name: nest-project-app
+    working_dir: /app
+    command: sh -c "corepack enable && corepack prepare pnpm@11.3.0 --activate && pnpm install && pnpm start:dev"
+    ports:
+      - "3333:3333"
+    environment:
+      PORT: 3333
+      DATABASE_URL: postgresql://postgres:docker@postgres:5432/nest_project
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: nest-project-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: nest_project
+      PGDATA: /data/postgres
+    volumes:
+      - postgres_data:/data/postgres
+
+volumes:
+  postgres_data:
