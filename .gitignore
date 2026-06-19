@@ -43,6 +43,10 @@ lerna-debug.log*
 .env.production.local
 .env.local
 
+# local JWT keys
+src/auth/keys/*.pem
+src/auth/keys/*.base64.txt
+
 # temp directory
 .temp
 .tmp
