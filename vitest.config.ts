@@ -28,6 +28,8 @@ export default defineConfig({
         globals: true,
         environment: 'node',
         setupFiles: ['./test/vitest.setup.ts'],
+        globalSetup: './test/vitest.global-setup.ts',
         include: ['src/**/*.spec.ts', 'test/**/*.spec.ts'],
+        hookTimeout: 60000,
     },
 });
